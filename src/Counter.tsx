@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function Counter() {
   const [count, setCount] = useState(0);
   const [calculation, setCalculation] = useState(0);
+  const [sth, setSth] = useState("hi");
 
   // UNSAFE_componentWillMount() -> called before mounting and render as a way to initialize state => use constructor instead ;)
   useEffect(() => {
@@ -11,12 +12,14 @@ function Counter() {
 
   useEffect(() => {
     setCalculation(() => count * 2);
+    setSth("hi" + count.toString());
     console.log("I render on every change of count => ComponentDidUpdate");
+    console.log(sth);
 
     return () => {
       console.log("unmounted => ComponentWillUnmount");
     };
-  }, [count]); // <- add the count variable here
+  }, [count, sth]); // <- add the count variable here
 
   return (
     <>
